@@ -1,31 +1,21 @@
-#include "main.h"
-/**
-*_strspn - search the number of bytes in the initial
-* segment of s which consist only of bytes from accept
-*@s:segment targeted
-*@accept:reference bytes container
-*
-*Return:returns the number of bytes in the initial
-* segment of s which consist only of bytes from accept
-*/
-unsigned int _strspn(char *s, char *accept)
-{
-	unsigned int bytes = 0;
-	int i;
+#include "lists.h"
+#include <stdlib.h>
 
-	while (*s)
+/**
+ * free_listint2 - Frees a list.
+ * @head: Address of the first node of a list.
+ **/
+
+void free_listint2(listint_t **head)
+{
+	listint_t *temp;
+
+	if (head == NULL)
+		return;
+	while (*head != NULL)
 	{
-		for (i = 0; accept[i]; i++)
-		{
-			if (accept[i] == *s)
-			{
-				bytes++;
-				break;
-			}
-			else if ((accept[i + 1]) == '\0')
-				return (bytes);
-		}
-		s++;
+		temp = (*head)->next;
+		free(*head);
+		*head = temp;
 	}
-	return (bytes);
 }
